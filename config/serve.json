@@ -1,0 +1,29 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://360around365.sharepoint.com/sites/AlertDemo/SitePages/Home.aspx",
+      "customActions": {
+        "a65b9e2c-446e-4554-94de-509c18355ac3": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "Top": "Test message"
+          }
+        }
+      }
+    },
+    "siteAlertExtension": {
+      "pageUrl": "https://360around365.sharepoint.com/sites/AlertDemo/SitePages/Home.aspx",
+      "customActions": {
+        "a65b9e2c-446e-4554-94de-509c18355ac3": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "Top": "Test message"
+          }
+        }
+      }
+    }
+  }
+}
