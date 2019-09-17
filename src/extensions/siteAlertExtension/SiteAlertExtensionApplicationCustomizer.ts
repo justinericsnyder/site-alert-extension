@@ -84,20 +84,57 @@ export default class SiteAlertExtensionApplicationCustomizer
 
       if (this.properties) {
 
-        this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}/_api/lists/GetByTitle('Alert')/items(1)`,  
+        this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}/_api/lists/GetByTitle('Alert')/items?$select=Title,AlertType,Display&$orderby=Created%20desc&$top=1`,  
                 SPHttpClient.configurations.v1)  
                 .then((response: SPHttpClientResponse) => {  
                   response.json().then((responseJSON: any) => {  
-                    let topString: string = responseJSON.Title;
+                    let topString: string = responseJSON.value[0].Title;
+                    // console.log ("Writing Object");
+                    // console.log (responseJSON.value[0].Title);
+                    let showFlag: string = responseJSON.value[0].Display;
+                    let bannerColor: string = "";
+                    let bannerIcon: string = "";
                     if (!topString) {
                       topString = "(Top property was not defined.)";
                     }
 
+                    // Want to determine if banner needs shown ////////////////////////////
+                    if(responseJSON.value[0].Display == "Hide") {
+                      showFlag = "none";
+                    } else  {
+                      showFlag = "block";
+                    }
+
+                    //Making Adjustements for Each Alert Type /////////////////////
+                    switch (responseJSON.value[0].AlertType) {
+                      case "Other":
+                        bannerColor = "#FFE380";
+                        bannerIcon = "Info";
+                      break;
+
+                      case "System":
+                        bannerColor = "#FFAC61";
+                        bannerIcon = "DataManagementSettings";
+                      break;
+
+                      case "Safety/Security":  
+                        bannerColor = "#ff8979";
+                        bannerIcon = "ShieldAlert";
+                      break;
+
+                      default:
+                        bannerColor = "#002d72";
+                        bannerIcon = "";
+                      break;
+                    }
+
+
+                    // Generating DOM for Banner /////////////////////////////////////
                     if (this._topPlaceholder.domElement) {
                       this._topPlaceholder.domElement.innerHTML = `
-                      <div class="${styles.app}">
-                        <div class="${styles.top}" style="background-color:${responseJSON.Color};">
-                          <i class="${getIconClassName(responseJSON.AlertType)}" aria-hidden="true"></i> ${escape(
+                      <div class="${styles.app}" style="display:${showFlag};">
+                        <div class="${styles.top}" style="background-color:${bannerColor};">
+                          <i class="${getIconClassName(bannerIcon)}" aria-hidden="true"></i> ${escape(
                             topString
                           )}
                         </div>
