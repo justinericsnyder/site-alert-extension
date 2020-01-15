@@ -84,7 +84,7 @@ export default class SiteAlertExtensionApplicationCustomizer
 
       if (this.properties) {
 
-        this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}/_api/lists/GetByTitle('Alert')/items?$select=Title,AlertType,Display&$orderby=Created%20desc&$top=1`,  
+        this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}/_api/lists/GetByTitle('Alert')/items?$select=Title,Link,AlertType,Display&$orderby=Created%20desc&$top=1`,  
                 SPHttpClient.configurations.v1)  
                 .then((response: SPHttpClientResponse) => {  
                   response.json().then((responseJSON: any) => {  
@@ -132,13 +132,14 @@ export default class SiteAlertExtensionApplicationCustomizer
                     // Generating DOM for Banner /////////////////////////////////////
                     if (this._topPlaceholder.domElement) {
                       this._topPlaceholder.domElement.innerHTML = `
+                      <a href="${responseJSON.value[0].Link}">
                       <div class="${styles.app}" style="display:${showFlag};">
-                        <div class="${styles.top}" style="background-color:${bannerColor};">
+                        <div class="${styles.top}" style="background-color:${bannerColor};" href="${responseJSON.value[0].Link}">
                           <i class="${getIconClassName(bannerIcon)}" aria-hidden="true"></i> ${escape(
                             topString
                           )}
                         </div>
-                      </div>`;
+                      </div></a>`;
                     }
                   });  
                 }); 

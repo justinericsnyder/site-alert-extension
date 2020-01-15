@@ -10,7 +10,7 @@
         align-items: center;
         justify-content: center;
         background-color: $ms-color-themePrimary;
-        color: $ms-color-white;
+        color: #000;
 
     }
 
@@ -19,4 +19,9 @@
 
   .hide {
     display: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: black;
 }
