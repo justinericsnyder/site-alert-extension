@@ -10,7 +10,7 @@
         align-items: center;
         justify-content: center;
         background-color: $ms-color-themePrimary;
-        color: #000;
+        color: #000 !important;
 
     }
 
@@ -23,5 +23,5 @@
 
 a:hover {
     text-decoration: underline;
-    color: black;
+    color: black !important;
 }

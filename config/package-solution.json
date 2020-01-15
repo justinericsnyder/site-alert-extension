@@ -3,7 +3,7 @@
   "solution": {
     "name": "site-alert-extension-client-side-solution",
     "id": "2ad36f2f-9804-437b-9a68-c33d7d02f9aa",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true,
     "isDomainIsolated": false,
     "features": [
@@ -11,7 +11,7 @@
         "title": "Application Extension - Deployment of custom action.",
         "description": "Deploys a custom action with ClientSideComponentId association",
         "id": "6daaddec-46ba-4ef6-86e2-1d4e0ae601bc",
-        "version": "1.0.0.0",
+        "version": "1.0.0.1",
         "assets": {
           "elementManifests": [
             "elements.xml"
